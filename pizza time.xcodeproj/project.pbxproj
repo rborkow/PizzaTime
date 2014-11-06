@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		239D2D861A0B320F0019F226 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239D2D851A0B320F0019F226 /* CircleView.swift */; };
 		4A81412B1A0AB363007E779C /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A81412A1A0AB363007E779C /* images.xcassets */; };
 		4A81412D1A0AB6AE007E779C /* BeerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A81412C1A0AB6AE007E779C /* BeerViewController.swift */; };
 		4AC2201C1A0AFF6400E6D9EB /* OrderSubmittedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2201B1A0AFF6400E6D9EB /* OrderSubmittedViewController.swift */; };
@@ -51,7 +50,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		239D2D851A0B320F0019F226 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		4A81412A1A0AB363007E779C /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 		4A81412C1A0AB6AE007E779C /* BeerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BeerViewController.swift; path = "pizza time/BeerViewController.swift"; sourceTree = SOURCE_ROOT; };
 		4AC2201B1A0AFF6400E6D9EB /* OrderSubmittedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OrderSubmittedViewController.swift; path = "pizza time/OrderSubmittedViewController.swift"; sourceTree = SOURCE_ROOT; };
@@ -128,7 +126,6 @@
 		598CD9F619F73B3500FA56A8 /* Pizza Time */ = {
 			isa = PBXGroup;
 			children = (
-				239D2D851A0B320F0019F226 /* CircleView.swift */,
 				590C83EC19F75DCA00163236 /* ConfirmationViewController.swift */,
 				590C83ED19F75DCA00163236 /* ReviewViewController.swift */,
 				590C83EE19F75DCA00163236 /* SettingsViewController.swift */,
@@ -305,7 +302,6 @@
 			files = (
 				590C83F019F75DCA00163236 /* ConfirmationViewController.swift in Sources */,
 				590C83F319F75DCA00163236 /* TapOrderViewController.swift in Sources */,
-				239D2D861A0B320F0019F226 /* CircleView.swift in Sources */,
 				59C53EF819F7403A002BEACE /* SignUpOneViewController.swift in Sources */,
 				853E947719FC94EC00266501 /* OrderHereViewController.swift in Sources */,
 				59887BB119FF696F00F94DAB /* ResetViewController.swift in Sources */,

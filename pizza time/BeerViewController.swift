@@ -20,13 +20,6 @@ class BeerViewController: UIViewController, UIViewControllerTransitioningDelegat
     @IBOutlet weak var sixerActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var nahActivityIndicator: UIActivityIndicatorView!
     
-    //For Balls
-    // Most conservative guess. We'll set them later.
-    var maxX : CGFloat = 320;
-    var maxY : CGFloat = 320;
-    let boxSize : CGFloat = CGFloat(5 * (arc4random_uniform(5) + 1))
-    var boxes : Array<UIView> = []
-    
     // For getting device motion updates
     let motionQueue = NSOperationQueue()
     let motionManager = CMMotionManager()
@@ -43,14 +36,6 @@ class BeerViewController: UIViewController, UIViewControllerTransitioningDelegat
         
         sixerActivityIndicator.hidesWhenStopped = true
         nahActivityIndicator.hidesWhenStopped = true
-        
-        //For Balls
-        maxX = super.view.bounds.size.width - boxSize;
-        maxY = super.view.bounds.size.height - boxSize;
-        
-        createAnimatorStuff()
-        generateBoxes()
-        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -63,7 +48,6 @@ class BeerViewController: UIViewController, UIViewControllerTransitioningDelegat
             self.glassImageView.transform = CGAffineTransformConcat(scale, translate)
             }) { (finished: Bool) -> Void in
                 //
-            self.motionManager.startDeviceMotionUpdatesToQueue(self.motionQueue, withHandler: self.gravityUpdated)
         }
         
 //        override func viewDidDisappear(animated: Bool)  {
@@ -235,144 +219,5 @@ class BeerViewController: UIViewController, UIViewControllerTransitioningDelegat
     // Pass the selected object to the new view controller.
     }
     */
-    
-    // MARK: - Balls
-    
-    func randomColor() -> UIColor {
-        let red = CGFloat(CGFloat(arc4random()%100000)/100000);
-        let green = CGFloat(CGFloat(arc4random()%100000)/100000);
-        let blue = CGFloat(CGFloat(arc4random()%100000)/100000);
-        
-        return UIColor(red: red, green: green, blue: blue, alpha: 0.0);
-    }
-    
-    func doesNotCollide(testRect: CGRect) -> Bool {
-        for box : UIView in boxes {
-            var viewRect = box.frame;
-            if(CGRectIntersectsRect(testRect, viewRect)) {
-                return false
-            }
-        }
-        return true
-    }
-    
-    func randomFrame() -> CGRect {
-        var guess = CGRectMake(9, 9, 9, 9)
-        
-        do {
-            let guessX = CGFloat(arc4random()) % maxX
-            let guessY = CGFloat(arc4random()) % maxY;
-            guess = CGRectMake(guessX, guessY, boxSize, boxSize);
-        } while(!doesNotCollide(guess))
-        
-        return guess
-    }
-    
-    func addBox(location: CGRect, color: UIColor) -> UIView {
-        let newCircle = CircleView(frame: location)
-        newCircle.backgroundColor = color
-        //let newBox = UIView(frame: location)
-        //newBox.backgroundColor = color
-        
-        
-        view.addSubview(newCircle)
-        addBoxToBehaviors(newCircle)
-        boxes += [newCircle]
-        return newCircle
-        
-        //view.addSubview(newBox)
-        //addBoxToBehaviors(newBox)
-        //boxes += [newBox]
-        //return newBox
-    }
-    
-    func generateBoxes() {
-        for i in 0...10 {
-            var frame = randomFrame()
-            var color = randomColor()
-            var newBox = addBox(frame, color: color);
-            //chainBoxes(newBox)
-        }
-    }
-    
-    let startPoint = CGPointMake(50, 50)
-    var prevBox = UIView()
-    
-    func chainBoxes(box: UIView) {
-        if(prevBox.frame.origin.x == 0) {
-            let attach = UIAttachmentBehavior(item:box, attachedToAnchor:startPoint)
-            attach.length = 61
-            attach.damping = 0.5
-            animator?.addBehavior(attach)
-            prevBox = box
-        } else {
-            let attach = UIAttachmentBehavior(item:box, attachedToItem:prevBox)
-            attach.length = 61
-            attach.damping = 0.5
-            animator?.addBehavior(attach)
-            prevBox = box
-        }
-    }
-    
-    //----------------- UIDynamicAllocator
-    
-    var animator:UIDynamicAnimator? = nil;
-    let gravity = UIGravityBehavior()
-    let collider = UICollisionBehavior()
-    let itemBehavior = UIDynamicItemBehavior()
-    
-    func createAnimatorStuff() {
-        animator = UIDynamicAnimator(referenceView:self.view);
-        
-        gravity.gravityDirection = CGVectorMake(0, 0.8)
-        animator?.addBehavior(gravity);
-        
-        // We're bouncin' off the walls
-        collider.translatesReferenceBoundsIntoBoundary = true
-        animator?.addBehavior(collider)
-        
-        itemBehavior.friction = 0.1;
-        itemBehavior.elasticity = 0.9
-        animator?.addBehavior(itemBehavior)
-    }
-    
-    func addBoxToBehaviors(box: UIView) {
-        gravity.addItem(box)
-        collider.addItem(box)
-        itemBehavior.addItem(box)
-    }
-    
-    //----------------- Core Motion
-    func gravityUpdated(motion: CMDeviceMotion!, error: NSError!) {
-        let grav : CMAcceleration = motion.gravity;
-        
-        let x = CGFloat(grav.x);
-        let y = CGFloat(grav.y);
-        var p = CGPointMake(x,y)
-        
-        if (error != nil) {
-            NSLog("\(error)")
-        }
-        
-        // Have to correct for orientation.
-        var orientation = UIApplication.sharedApplication().statusBarOrientation;
-        
-        if(orientation == UIInterfaceOrientation.LandscapeLeft) {
-            var t = p.x
-            p.x = 0 - p.y
-            p.y = t
-        } else if (orientation == UIInterfaceOrientation.LandscapeRight) {
-            var t = p.x
-            p.x = p.y
-            p.y = 0 - t
-        } else if (orientation == UIInterfaceOrientation.PortraitUpsideDown) {
-            p.x *= -1
-            p.y *= -1
-        }
-        
-        var v = CGVectorMake(p.x, 0 - p.y);
-        gravity.gravityDirection = v;
-    }
-
     
 }

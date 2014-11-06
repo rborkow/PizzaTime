@@ -7,17 +7,30 @@
 //
 
 import UIKit
+import CoreMotion
 
 class BeerViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
     var isPresenting: Bool = true
-
+    
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var beerfoamImageView: UIImageView!
     @IBOutlet weak var beerLiquidImageView: UIImageView!
     @IBOutlet weak var glassImageView: UIImageView!
     @IBOutlet weak var sixerActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var nahActivityIndicator: UIActivityIndicatorView!
+    
+    //For Balls
+    // Most conservative guess. We'll set them later.
+    var maxX : CGFloat = 320;
+    var maxY : CGFloat = 320;
+    let boxSize : CGFloat = CGFloat(5 * (arc4random_uniform(5) + 1))
+    var boxes : Array<UIView> = []
+    
+    // For getting device motion updates
+    let motionQueue = NSOperationQueue()
+    let motionManager = CMMotionManager()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +40,17 @@ class BeerViewController: UIViewController, UIViewControllerTransitioningDelegat
         self.beerfoamImageView.transform = CGAffineTransformConcat(scale, translate)
         self.beerLiquidImageView.transform = CGAffineTransformConcat(scale, translate)
         self.glassImageView.transform = CGAffineTransformConcat(scale, translate)
-               
+        
         sixerActivityIndicator.hidesWhenStopped = true
         nahActivityIndicator.hidesWhenStopped = true
+        
+        //For Balls
+        maxX = super.view.bounds.size.width - boxSize;
+        maxY = super.view.bounds.size.height - boxSize;
+        
+        createAnimatorStuff()
+        generateBoxes()
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -41,96 +62,104 @@ class BeerViewController: UIViewController, UIViewControllerTransitioningDelegat
             self.beerLiquidImageView.transform = CGAffineTransformConcat(scale, translate)
             self.glassImageView.transform = CGAffineTransformConcat(scale, translate)
             }) { (finished: Bool) -> Void in
-            //
+                //
+            self.motionManager.startDeviceMotionUpdatesToQueue(self.motionQueue, withHandler: self.gravityUpdated)
         }
-       
+        
+//        override func viewDidDisappear(animated: Bool)  {
+//            super.viewDidDisappear(animated)
+//            NSLog("Stopping gravity")
+//            motionManager.stopDeviceMotionUpdates()
+//        }
+        
+        
         delay(0.3) {
-        srand48(Int(NSDate().timeIntervalSince1970))
-        
-        // SMALL YELLOW loop from 0 to 9
-        for i in 0...12 {
+            srand48(Int(NSDate().timeIntervalSince1970))
             
-            // create a square
-            let square = UIView()
-            square.frame = CGRect(x: 55, y: 300, width: 8, height: 8)
-            square.layer.cornerRadius = 4
-            square.backgroundColor = UIColor(red: 255/255, green: 227/255, blue: 1/255, alpha: 0.5)
-            self.view.addSubview(square)
+            // SMALL YELLOW loop from 0 to 9
+            for i in 0...12 {
+                
+                // create a square
+                let square = UIView()
+                square.frame = CGRect(x: 55, y: 300, width: 8, height: 8)
+                square.layer.cornerRadius = 4
+                square.backgroundColor = UIColor(red: 255/255, green: 227/255, blue: 1/255, alpha: 0.5)
+                self.view.addSubview(square)
+                
+                // randomly create a value between 0.0 and 150.0
+                let randomXOffset = CGFloat( drand48() * 65)
+                
+                // create the animation
+                let path = UIBezierPath()
+                path.moveToPoint(CGPoint(x: 135 + randomXOffset, y: 370))
+                path.addCurveToPoint(CGPointMake(135 + randomXOffset, 336), controlPoint1: CGPointMake(135 + randomXOffset, 384), controlPoint2: CGPointMake(138.5 + randomXOffset, 349.5))
+                path.addCurveToPoint(CGPointMake(135.5 + randomXOffset, 299.5), controlPoint1: CGPointMake(131.5 + randomXOffset, 322.5), controlPoint2: CGPointMake(131.5 + randomXOffset, 311.5))
+                path.addCurveToPoint(CGPointMake(135.5 + randomXOffset, 255.5), controlPoint1: CGPointMake(139.5 + randomXOffset, 287.5), controlPoint2: CGPointMake(138.5 + randomXOffset, 268.5))
+                path.addCurveToPoint(CGPointMake(130.5 + randomXOffset, 217.5), controlPoint1: CGPointMake(132.5 + randomXOffset, 242.5), controlPoint2: CGPointMake(127.5 + randomXOffset, 231.5))
+                path.addCurveToPoint(CGPointMake(135.5 + randomXOffset, 181.5), controlPoint1: CGPointMake(133.5 + randomXOffset, 203.5), controlPoint2: CGPointMake(137.5  + randomXOffset, 188.5))
+                path.addCurveToPoint(CGPointMake(130 + randomXOffset, 158), controlPoint1: CGPointMake(133.5 + randomXOffset, 174.5), controlPoint2: CGPointMake(130 + randomXOffset, 158))
+                
+                // create the animation
+                let anim = CAKeyframeAnimation(keyPath: "position")
+                anim.path = path.CGPath
+                anim.rotationMode = kCAAnimationRotateAuto
+                anim.repeatCount = Float.infinity
+                
+                // stagger each animation by a random value
+                // `290` was chosen simply by experimentation
+                anim.timeOffset = 290 * drand48()
+                
+                // each square will take between 4.0 and 8.0 seconds
+                // to complete one animation loop
+                anim.duration = 1.5 + 3 * drand48()
+                
+                // add the animation
+                square.layer.addAnimation(anim, forKey: "animate position along path")
+            }
             
-            // randomly create a value between 0.0 and 150.0
-            let randomXOffset = CGFloat( drand48() * 65)
-            
-            // create the animation
-            let path = UIBezierPath()
-            path.moveToPoint(CGPoint(x: 135 + randomXOffset, y: 370))
-            path.addCurveToPoint(CGPointMake(135 + randomXOffset, 336), controlPoint1: CGPointMake(135 + randomXOffset, 384), controlPoint2: CGPointMake(138.5 + randomXOffset, 349.5))
-            path.addCurveToPoint(CGPointMake(135.5 + randomXOffset, 299.5), controlPoint1: CGPointMake(131.5 + randomXOffset, 322.5), controlPoint2: CGPointMake(131.5 + randomXOffset, 311.5))
-            path.addCurveToPoint(CGPointMake(135.5 + randomXOffset, 255.5), controlPoint1: CGPointMake(139.5 + randomXOffset, 287.5), controlPoint2: CGPointMake(138.5 + randomXOffset, 268.5))
-            path.addCurveToPoint(CGPointMake(130.5 + randomXOffset, 217.5), controlPoint1: CGPointMake(132.5 + randomXOffset, 242.5), controlPoint2: CGPointMake(127.5 + randomXOffset, 231.5))
-            path.addCurveToPoint(CGPointMake(135.5 + randomXOffset, 181.5), controlPoint1: CGPointMake(133.5 + randomXOffset, 203.5), controlPoint2: CGPointMake(137.5  + randomXOffset, 188.5))
-            path.addCurveToPoint(CGPointMake(130 + randomXOffset, 158), controlPoint1: CGPointMake(133.5 + randomXOffset, 174.5), controlPoint2: CGPointMake(130 + randomXOffset, 158))
-            
-            // create the animation
-            let anim = CAKeyframeAnimation(keyPath: "position")
-            anim.path = path.CGPath
-            anim.rotationMode = kCAAnimationRotateAuto
-            anim.repeatCount = Float.infinity
-            
-            // stagger each animation by a random value
-            // `290` was chosen simply by experimentation
-            anim.timeOffset = 290 * drand48()
-            
-            // each square will take between 4.0 and 8.0 seconds
-            // to complete one animation loop
-            anim.duration = 1.5 + 3 * drand48()
-            
-            // add the animation
-            square.layer.addAnimation(anim, forKey: "animate position along path")
-        }
-        
-        // BIG YELLOW loop from 0 to 5
-        for i in 0...5 {
-            
-            // create a square
-            let square = UIView()
-            square.frame = CGRect(x: 55, y: 300, width: 14, height: 14)
-            square.layer.cornerRadius = 7
-            square.backgroundColor = UIColor(red: 255/255, green: 234/255, blue: 67/255, alpha: 0.5)
-            self.view.addSubview(square)
-            
-            // randomly create a value between 0.0 and 150.0
-            let randomXOffset = CGFloat( drand48() * 65)
-            
-            // for every y-value on the bezier curve
-            // add our random y offset so that each individual animation
-            // will appear at a different y-position
-            
-            // create the animation
-            let path = UIBezierPath()
-            path.moveToPoint(CGPoint(x: 135 + randomXOffset, y: 370))
-            path.addCurveToPoint(CGPointMake(135 + randomXOffset, 336), controlPoint1: CGPointMake(135 + randomXOffset, 384), controlPoint2: CGPointMake(138.5 + randomXOffset, 349.5))
-            path.addCurveToPoint(CGPointMake(135.5 + randomXOffset, 299.5), controlPoint1: CGPointMake(131.5 + randomXOffset, 322.5), controlPoint2: CGPointMake(131.5 + randomXOffset, 311.5))
-            path.addCurveToPoint(CGPointMake(135.5 + randomXOffset, 255.5), controlPoint1: CGPointMake(139.5 + randomXOffset, 287.5), controlPoint2: CGPointMake(138.5 + randomXOffset, 268.5))
-            path.addCurveToPoint(CGPointMake(130.5 + randomXOffset, 217.5), controlPoint1: CGPointMake(132.5 + randomXOffset, 242.5), controlPoint2: CGPointMake(127.5 + randomXOffset, 231.5))
-            path.addCurveToPoint(CGPointMake(135.5 + randomXOffset, 181.5), controlPoint1: CGPointMake(133.5 + randomXOffset, 203.5), controlPoint2: CGPointMake(137.5  + randomXOffset, 188.5))
-            path.addCurveToPoint(CGPointMake(130 + randomXOffset, 158), controlPoint1: CGPointMake(133.5 + randomXOffset, 174.5), controlPoint2: CGPointMake(130 + randomXOffset, 158))
-            
-            // create the animation
-            let anim = CAKeyframeAnimation(keyPath: "position")
-            anim.path = path.CGPath
-            anim.rotationMode = kCAAnimationRotateAuto
-            anim.repeatCount = Float.infinity
-            
-            // stagger each animation by a random value
-            // `290` was chosen simply by experimentation
-            anim.timeOffset = 290 * drand48()
-            
-            // each square will take between 4.0 and 8.0 seconds
-            // to complete one animation loop
-            anim.duration = 1.5 + 3 * drand48()
-            
-            // add the animation
-            square.layer.addAnimation(anim, forKey: "animate position along path")
+            // BIG YELLOW loop from 0 to 5
+            for i in 0...5 {
+                
+                // create a square
+                let square = UIView()
+                square.frame = CGRect(x: 55, y: 300, width: 14, height: 14)
+                square.layer.cornerRadius = 7
+                square.backgroundColor = UIColor(red: 255/255, green: 234/255, blue: 67/255, alpha: 0.5)
+                self.view.addSubview(square)
+                
+                // randomly create a value between 0.0 and 150.0
+                let randomXOffset = CGFloat( drand48() * 65)
+                
+                // for every y-value on the bezier curve
+                // add our random y offset so that each individual animation
+                // will appear at a different y-position
+                
+                // create the animation
+                let path = UIBezierPath()
+                path.moveToPoint(CGPoint(x: 135 + randomXOffset, y: 370))
+                path.addCurveToPoint(CGPointMake(135 + randomXOffset, 336), controlPoint1: CGPointMake(135 + randomXOffset, 384), controlPoint2: CGPointMake(138.5 + randomXOffset, 349.5))
+                path.addCurveToPoint(CGPointMake(135.5 + randomXOffset, 299.5), controlPoint1: CGPointMake(131.5 + randomXOffset, 322.5), controlPoint2: CGPointMake(131.5 + randomXOffset, 311.5))
+                path.addCurveToPoint(CGPointMake(135.5 + randomXOffset, 255.5), controlPoint1: CGPointMake(139.5 + randomXOffset, 287.5), controlPoint2: CGPointMake(138.5 + randomXOffset, 268.5))
+                path.addCurveToPoint(CGPointMake(130.5 + randomXOffset, 217.5), controlPoint1: CGPointMake(132.5 + randomXOffset, 242.5), controlPoint2: CGPointMake(127.5 + randomXOffset, 231.5))
+                path.addCurveToPoint(CGPointMake(135.5 + randomXOffset, 181.5), controlPoint1: CGPointMake(133.5 + randomXOffset, 203.5), controlPoint2: CGPointMake(137.5  + randomXOffset, 188.5))
+                path.addCurveToPoint(CGPointMake(130 + randomXOffset, 158), controlPoint1: CGPointMake(133.5 + randomXOffset, 174.5), controlPoint2: CGPointMake(130 + randomXOffset, 158))
+                
+                // create the animation
+                let anim = CAKeyframeAnimation(keyPath: "position")
+                anim.path = path.CGPath
+                anim.rotationMode = kCAAnimationRotateAuto
+                anim.repeatCount = Float.infinity
+                
+                // stagger each animation by a random value
+                // `290` was chosen simply by experimentation
+                anim.timeOffset = 290 * drand48()
+                
+                // each square will take between 4.0 and 8.0 seconds
+                // to complete one animation loop
+                anim.duration = 1.5 + 3 * drand48()
+                
+                // add the animation
+                square.layer.addAnimation(anim, forKey: "animate position along path")
             }
         }
     }
@@ -162,7 +191,7 @@ class BeerViewController: UIViewController, UIViewControllerTransitioningDelegat
             destinationVC.glassImageView = glassImageView
             destinationVC.beerfoamImageView = beerfoamImageView
             destinationVC.beerLiquidImageView = beerLiquidImageView
-        
+            
         } else if segue.identifier == "nahToConfirmation"{
             var destinationVC = segue.destinationViewController as OrderSubmittedViewController
             destinationVC.modalPresentationStyle = UIModalPresentationStyle.Custom
@@ -173,11 +202,11 @@ class BeerViewController: UIViewController, UIViewControllerTransitioningDelegat
             destinationVC.beerLiquidImageView = beerLiquidImageView
         }
     }
-
+    
     @IBAction func onBackButtonPressed(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
-
+    
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
     }
@@ -190,21 +219,160 @@ class BeerViewController: UIViewController, UIViewControllerTransitioningDelegat
             ),
             dispatch_get_main_queue(), closure)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK: - Balls
+    
+    func randomColor() -> UIColor {
+        let red = CGFloat(CGFloat(arc4random()%100000)/100000);
+        let green = CGFloat(CGFloat(arc4random()%100000)/100000);
+        let blue = CGFloat(CGFloat(arc4random()%100000)/100000);
+        
+        return UIColor(red: red, green: green, blue: blue, alpha: 0.0);
+    }
+    
+    func doesNotCollide(testRect: CGRect) -> Bool {
+        for box : UIView in boxes {
+            var viewRect = box.frame;
+            if(CGRectIntersectsRect(testRect, viewRect)) {
+                return false
+            }
+        }
+        return true
+    }
+    
+    func randomFrame() -> CGRect {
+        var guess = CGRectMake(9, 9, 9, 9)
+        
+        do {
+            let guessX = CGFloat(arc4random()) % maxX
+            let guessY = CGFloat(arc4random()) % maxY;
+            guess = CGRectMake(guessX, guessY, boxSize, boxSize);
+        } while(!doesNotCollide(guess))
+        
+        return guess
+    }
+    
+    func addBox(location: CGRect, color: UIColor) -> UIView {
+        let newCircle = CircleView(frame: location)
+        newCircle.backgroundColor = color
+        //let newBox = UIView(frame: location)
+        //newBox.backgroundColor = color
+        
+        
+        view.addSubview(newCircle)
+        addBoxToBehaviors(newCircle)
+        boxes += [newCircle]
+        return newCircle
+        
+        //view.addSubview(newBox)
+        //addBoxToBehaviors(newBox)
+        //boxes += [newBox]
+        //return newBox
+    }
+    
+    func generateBoxes() {
+        for i in 0...10 {
+            var frame = randomFrame()
+            var color = randomColor()
+            var newBox = addBox(frame, color: color);
+            //chainBoxes(newBox)
+        }
+    }
+    
+    let startPoint = CGPointMake(50, 50)
+    var prevBox = UIView()
+    
+    func chainBoxes(box: UIView) {
+        if(prevBox.frame.origin.x == 0) {
+            let attach = UIAttachmentBehavior(item:box, attachedToAnchor:startPoint)
+            attach.length = 61
+            attach.damping = 0.5
+            animator?.addBehavior(attach)
+            prevBox = box
+        } else {
+            let attach = UIAttachmentBehavior(item:box, attachedToItem:prevBox)
+            attach.length = 61
+            attach.damping = 0.5
+            animator?.addBehavior(attach)
+            prevBox = box
+        }
+    }
+    
+    //----------------- UIDynamicAllocator
+    
+    var animator:UIDynamicAnimator? = nil;
+    let gravity = UIGravityBehavior()
+    let collider = UICollisionBehavior()
+    let itemBehavior = UIDynamicItemBehavior()
+    
+    func createAnimatorStuff() {
+        animator = UIDynamicAnimator(referenceView:self.view);
+        
+        gravity.gravityDirection = CGVectorMake(0, 0.8)
+        animator?.addBehavior(gravity);
+        
+        // We're bouncin' off the walls
+        collider.translatesReferenceBoundsIntoBoundary = true
+        animator?.addBehavior(collider)
+        
+        itemBehavior.friction = 0.1;
+        itemBehavior.elasticity = 0.9
+        animator?.addBehavior(itemBehavior)
+    }
+    
+    func addBoxToBehaviors(box: UIView) {
+        gravity.addItem(box)
+        collider.addItem(box)
+        itemBehavior.addItem(box)
+    }
+    
+    //----------------- Core Motion
+    func gravityUpdated(motion: CMDeviceMotion!, error: NSError!) {
+        let grav : CMAcceleration = motion.gravity;
+        
+        let x = CGFloat(grav.x);
+        let y = CGFloat(grav.y);
+        var p = CGPointMake(x,y)
+        
+        if (error != nil) {
+            NSLog("\(error)")
+        }
+        
+        // Have to correct for orientation.
+        var orientation = UIApplication.sharedApplication().statusBarOrientation;
+        
+        if(orientation == UIInterfaceOrientation.LandscapeLeft) {
+            var t = p.x
+            p.x = 0 - p.y
+            p.y = t
+        } else if (orientation == UIInterfaceOrientation.LandscapeRight) {
+            var t = p.x
+            p.x = p.y
+            p.y = 0 - t
+        } else if (orientation == UIInterfaceOrientation.PortraitUpsideDown) {
+            p.x *= -1
+            p.y *= -1
+        }
+        
+        var v = CGVectorMake(p.x, 0 - p.y);
+        gravity.gravityDirection = v;
+    }
 
+    
 }

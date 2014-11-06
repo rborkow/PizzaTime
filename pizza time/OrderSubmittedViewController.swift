@@ -39,6 +39,7 @@ class OrderSubmittedViewController: UIViewController, UIViewControllerTransition
         self.pizzaImage.transform = CGAffineTransformConcat(scale, translate)
         
         // Do any additional setup after loading the view.
+        launchNotification()
     }
     
     
@@ -105,6 +106,17 @@ class OrderSubmittedViewController: UIViewController, UIViewControllerTransition
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - Notification
+    func launchNotification() {
+        var notification = UILocalNotification()
+        notification.timeZone = NSTimeZone.defaultTimeZone()
+        var dateTimeToFire: NSDate = NSDate(timeIntervalSinceNow: 15)
+        notification.fireDate = dateTimeToFire
+        notification.alertBody = "It's almost pizza time! Your order is on its way!"
+        notification.alertAction = "Show me!"
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
     
 

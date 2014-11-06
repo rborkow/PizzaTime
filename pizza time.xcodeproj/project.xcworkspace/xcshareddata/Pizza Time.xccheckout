@@ -7,39 +7,34 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>C57D12CA-3BC4-4546-B9BC-57515E6D277E</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Pizza Time</string>
+	<string>pizza time</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>d31ab619-1d78-40d9-be90-3de68ab4b70e++8321</key>
-		<string>https://svn.twitter.biz/design/designers/bellona</string>
+		<key>749CB6E8F38B38E6E8278E7F9C6247F208614A37</key>
+		<string>https://github.com/rborkow/PizzaTime.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>iOS_prototyping_class/Pizza Time/Pizza Time.xcodeproj</string>
+	<string>pizza time.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>d31ab619-1d78-40d9-be90-3de68ab4b70e++8321</key>
-		<string>../../../..</string>
-	</dict>
-	<key>IDESourceControlProjectRepositoryRootDictionary</key>
-	<dict>
-		<key>d31ab619-1d78-40d9-be90-3de68ab4b70e++8321</key>
-		<string>https://svn.twitter.biz/design</string>
+		<key>749CB6E8F38B38E6E8278E7F9C6247F208614A37</key>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://svn.twitter.biz/design/designers/bellona/iOS_prototyping_class/Pizza%20Time/Pizza%20Time.xcodeproj</string>
+	<string>https://github.com/rborkow/PizzaTime.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>d31ab619-1d78-40d9-be90-3de68ab4b70e++8321</string>
+	<string>749CB6E8F38B38E6E8278E7F9C6247F208614A37</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.subversion</string>
+			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>d31ab619-1d78-40d9-be90-3de68ab4b70e++8321</string>
+			<string>749CB6E8F38B38E6E8278E7F9C6247F208614A37</string>
 			<key>IDESourceControlWCCName</key>
-			<string>bellona</string>
+			<string>Pizza%20Time%20v2</string>
 		</dict>
 	</array>
 </dict>

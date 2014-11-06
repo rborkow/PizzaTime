@@ -17,7 +17,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
+        
         return true
+    }
+    
+    func application(application: UIApplication!, didReceiveLocalNotification notification: UILocalNotification!) {
+        println("Notification Recieved!")
+        
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let vc = storyboard.instantiateViewControllerWithIdentifier("ConfirmationViewController") as ConfirmationViewController
+//        self.window?.rootViewController?.presentViewController(vc, animated: false, completion: nil)
+        let vc = self.window?.rootViewController?.storyboard?.instantiateViewControllerWithIdentifier("ConfirmationViewController") as ConfirmationViewController
+        
+        //let vc = self.window?.rootViewController?.storyboard?.instantiateViewControllerWithIdentifier("ConfirmationViewController")! as ConfirmationViewController
+        self.window?.rootViewController = vc
     }
 
     func applicationWillResignActive(application: UIApplication) {

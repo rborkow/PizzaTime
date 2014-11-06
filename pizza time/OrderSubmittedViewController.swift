@@ -114,7 +114,8 @@ class OrderSubmittedViewController: UIViewController, UIViewControllerTransition
         notification.timeZone = NSTimeZone.defaultTimeZone()
         var dateTimeToFire: NSDate = NSDate(timeIntervalSinceNow: 15)
         notification.fireDate = dateTimeToFire
-        notification.alertBody = "Whoa dude, Pizza's here!"
+        notification.alertBody = "It's almost pizza time! Your order is on its way!"
+        notification.alertAction = "Show me!"
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
     

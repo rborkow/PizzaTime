@@ -21,6 +21,10 @@ class SettingsViewController: UIViewController {
         navigationController?.popViewControllerAnimated(true)
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

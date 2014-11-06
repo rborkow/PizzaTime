@@ -147,7 +147,10 @@ class ConfirmationViewController: UIViewController, UIViewControllerTransitionin
         }))
 
     }
-    
+   
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
 
 //    @IBAction func onTapDot(sender: UIButton) {
 //    

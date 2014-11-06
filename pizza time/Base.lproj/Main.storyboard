@@ -1343,8 +1343,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onOrderButton:" destination="RJU-9P-SXm" eventType="touchUpInside" id="5fL-aq-oiK"/>
-                                    <segue destination="opl-RY-U6p" kind="modal" identifier="confirmationSeg" modalTransitionStyle="crossDissolve" id="ncO-aQ-cM1"/>
+                                    <segue destination="opl-RY-U6p" kind="modal" modalTransitionStyle="crossDissolve" id="72A-W8-Kjl"/>
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="5BO-mn-gLH">
@@ -1797,11 +1796,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="ude-Ak-Vaq" id="bbb-1v-P9X"/>
                         <outlet property="backButton" destination="z1b-Fr-Ugu" id="mGj-Sg-uD7"/>
                         <outlet property="beerLiquidImageView" destination="Tub-K7-NkA" id="YHU-AA-ONn"/>
                         <outlet property="beerfoamImageView" destination="6vV-I2-YYB" id="5pb-ay-dME"/>
                         <outlet property="glassImageView" destination="CzE-XJ-wzK" id="c8o-6B-rt2"/>
                         <outlet property="nahActivityIndicator" destination="YJz-7B-0jR" id="3TZ-nF-tIt"/>
+                        <outlet property="nahButton" destination="CHo-zT-RSI" id="8Xl-h4-dSc"/>
                         <outlet property="sixerActivityIndicator" destination="MDT-up-Rnl" id="KfW-oG-wnw"/>
                     </connections>
                 </viewController>
@@ -1866,6 +1867,9 @@
                                 <state key="normal" title="ORDER MORE PIZZA!" backgroundImage="buttonBackground">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="iPo-yQ-Ivv" kind="modal" modalTransitionStyle="crossDissolve" id="q09-2K-SWS"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="titleBar" id="Q4j-sA-kwO">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="67"/>
@@ -1932,7 +1936,7 @@
                         <outlet property="letYouKnowLabel" destination="aXT-md-iQo" id="yIO-37-0QR"/>
                         <outlet property="orderButton" destination="0IN-W8-x5j" id="73A-vd-qHI"/>
                         <outlet property="outForDeliveryLabel" destination="6Fh-jg-6m7" id="NaO-7A-RVV"/>
-                        <outlet property="pizzaImage" destination="4HJ-9k-BUX" id="X8l-MF-Jn1"/>
+                        <outlet property="pizzaImageView" destination="4HJ-9k-BUX" id="sIu-ra-hz2"/>
                         <outlet property="pizzaLabel" destination="V5Q-eh-DFl" id="thA-Ka-Qf3"/>
                         <outlet property="prepLabel" destination="sb5-dX-nBm" id="Crm-y2-A4J"/>
                     </connections>
@@ -1996,8 +2000,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="6Us-iZ-TxD"/>
-        <segue reference="ncO-aQ-cM1"/>
+        <segue reference="q09-2K-SWS"/>
         <segue reference="ccc-hi-vfH"/>
+        <segue reference="72A-W8-Kjl"/>
     </inferredMetricsTieBreakers>
 </document>

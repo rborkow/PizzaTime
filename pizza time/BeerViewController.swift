@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BeerViewController: UIViewController, UIViewControllerTransitioningDelegate {
+class BeerViewController: UIViewController {
     
     var isPresenting: Bool = true
 
@@ -18,6 +18,8 @@ class BeerViewController: UIViewController, UIViewControllerTransitioningDelegat
     @IBOutlet weak var glassImageView: UIImageView!
     @IBOutlet weak var sixerActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var nahActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var nahButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +35,7 @@ class BeerViewController: UIViewController, UIViewControllerTransitioningDelegat
     }
     
     override func viewDidAppear(animated: Bool) {
-        UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+        UIView.animateWithDuration(0.3, delay: 0.2, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             
             let scale = CGAffineTransformMakeScale(1, 1)
             let translate = CGAffineTransformMakeTranslation(0, 0)
@@ -135,11 +137,23 @@ class BeerViewController: UIViewController, UIViewControllerTransitioningDelegat
         }
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        UIView.animateWithDuration(0.2, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+            
+            let scale = CGAffineTransformMakeScale(0.4, 0.4)
+            let translate = CGAffineTransformMakeTranslation(320, 0)
+            self.beerfoamImageView.transform = CGAffineTransformConcat(scale, translate)
+            self.beerLiquidImageView.transform = CGAffineTransformConcat(scale, translate)
+            self.glassImageView.transform = CGAffineTransformConcat(scale, translate)
+            }) { (finished: Bool) -> Void in
+                //
+        }
+    }
+    
     @IBAction func onAddButtonPressed(sender: AnyObject) {
         sixerActivityIndicator.startAnimating()
         
         delay(2, closure: { () -> () in
-            self.performSegueWithIdentifier("sixerToConfirmation", sender: self)
             self.sixerActivityIndicator.stopAnimating()
         })
     }
@@ -148,32 +162,10 @@ class BeerViewController: UIViewController, UIViewControllerTransitioningDelegat
         nahActivityIndicator.startAnimating()
         
         delay(2, closure: { () -> () in
-            self.performSegueWithIdentifier("nahToConfirmation", sender: self)
             self.nahActivityIndicator.stopAnimating()
         })
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if segue.identifier == "sixerToConfirmation"{
-            var destinationVC = segue.destinationViewController as OrderSubmittedViewController
-            destinationVC.modalPresentationStyle = UIModalPresentationStyle.Custom
-            destinationVC.transitioningDelegate = destinationVC as OrderSubmittedViewController
-            
-            destinationVC.glassImageView = glassImageView
-            destinationVC.beerfoamImageView = beerfoamImageView
-            destinationVC.beerLiquidImageView = beerLiquidImageView
-        
-        } else if segue.identifier == "nahToConfirmation"{
-            var destinationVC = segue.destinationViewController as OrderSubmittedViewController
-            destinationVC.modalPresentationStyle = UIModalPresentationStyle.Custom
-            destinationVC.transitioningDelegate = destinationVC as OrderSubmittedViewController
-            
-            destinationVC.glassImageView = glassImageView
-            destinationVC.beerfoamImageView = beerfoamImageView
-            destinationVC.beerLiquidImageView = beerLiquidImageView
-        }
-    }
-
     @IBAction func onBackButtonPressed(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }

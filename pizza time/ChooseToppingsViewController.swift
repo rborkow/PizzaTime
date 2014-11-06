@@ -90,11 +90,39 @@ class ChooseToppingsViewController: UIViewController, UIScrollViewDelegate {
             let scale = CGAffineTransformMakeScale(1, 1)
             let translate = CGAffineTransformMakeTranslation(0, 0)
             self.layerCrustImageView.transform = CGAffineTransformConcat(scale, translate)
+            self.layerSauceImageView.transform = CGAffineTransformConcat(scale, translate)
+            self.layerCheeseImageView.transform = CGAffineTransformConcat(scale, translate)
+            self.layerPepperoniImageView.transform = CGAffineTransformConcat(scale, translate)
+            self.layerPeppersImageView.transform = CGAffineTransformConcat(scale, translate)
+            self.layerMushroomsImageView.transform = CGAffineTransformConcat(scale, translate)
+            self.layerPineappleImageView.transform = CGAffineTransformConcat(scale, translate)
+            self.layerOlivesImageView.transform = CGAffineTransformConcat(scale, translate)
+            self.layerRedOnionImageView.transform = CGAffineTransformConcat(scale, translate)
             }) { (finished: Bool) -> Void in
                 UIView.animateWithDuration(0.4, animations: { () -> Void in
                     self.descriptionLabel.alpha = 1
                 })
         }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        UIView.animateWithDuration(0.4, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
+            self.descriptionLabel.alpha = 0
+            self.scrollView.contentOffset.x = 0
+            let scale = CGAffineTransformMakeScale(0.4, 0.4)
+            let translate = CGAffineTransformMakeTranslation(280, 0)
+            self.layerCrustImageView.transform = CGAffineTransformConcat(scale, translate)
+            self.layerSauceImageView.transform = CGAffineTransformConcat(scale, translate)
+            self.layerCheeseImageView.transform = CGAffineTransformConcat(scale, translate)
+            self.layerPepperoniImageView.transform = CGAffineTransformConcat(scale, translate)
+            self.layerPeppersImageView.transform = CGAffineTransformConcat(scale, translate)
+            self.layerMushroomsImageView.transform = CGAffineTransformConcat(scale, translate)
+            self.layerPineappleImageView.transform = CGAffineTransformConcat(scale, translate)
+            self.layerOlivesImageView.transform = CGAffineTransformConcat(scale, translate)
+            self.layerRedOnionImageView.transform = CGAffineTransformConcat(scale, translate)
+            }) { (finished: Bool) -> Void in
+        }
+
     }
     
     @IBAction func onBackButtonPressed(sender: AnyObject) {
@@ -457,21 +485,5 @@ class ChooseToppingsViewController: UIViewController, UIScrollViewDelegate {
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
     }
-
-    // Segue to the Beer screen
-    
-    @IBAction func onOrderButton(sender: UIButton) {
-        self.performSegueWithIdentifier("confirmationSeg", sender: self)
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if segue.identifier == "confirmationSeg"{
-            
-            var destinationVC = segue.destinationViewController as BeerViewController
-            destinationVC.modalPresentationStyle = UIModalPresentationStyle.Custom
-            destinationVC.transitioningDelegate = destinationVC as BeerViewController
-        }
         
-    }
-    
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		238CAA271A0BE380001F2564 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238CAA261A0BE380001F2564 /* OrderModel.swift */; };
 		4A81412B1A0AB363007E779C /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A81412A1A0AB363007E779C /* images.xcassets */; };
 		4A81412D1A0AB6AE007E779C /* BeerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A81412C1A0AB6AE007E779C /* BeerViewController.swift */; };
 		4AC2201C1A0AFF6400E6D9EB /* OrderSubmittedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2201B1A0AFF6400E6D9EB /* OrderSubmittedViewController.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		238CAA261A0BE380001F2564 /* OrderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OrderModel.swift; path = "pizza time/OrderModel.swift"; sourceTree = SOURCE_ROOT; };
 		4A81412A1A0AB363007E779C /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 		4A81412C1A0AB6AE007E779C /* BeerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BeerViewController.swift; path = "pizza time/BeerViewController.swift"; sourceTree = SOURCE_ROOT; };
 		4AC2201B1A0AFF6400E6D9EB /* OrderSubmittedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OrderSubmittedViewController.swift; path = "pizza time/OrderSubmittedViewController.swift"; sourceTree = SOURCE_ROOT; };
@@ -140,6 +142,7 @@
 				853E947619FC94EC00266501 /* OrderHereViewController.swift */,
 				590C83F419F75FBE00163236 /* ChooseToppingsViewController.swift */,
 				590C83F519F75FBE00163236 /* FeelinLuckyViewController.swift */,
+				238CAA261A0BE380001F2564 /* OrderModel.swift */,
 				590C83F619F75FBE00163236 /* OrderNowViewController.swift */,
 				59C53EFD19F74171002BEACE /* StartViewController.swift */,
 				59C53EFB19F7406C002BEACE /* SignInViewController.swift */,
@@ -317,6 +320,7 @@
 				59C53EFE19F74171002BEACE /* StartViewController.swift in Sources */,
 				590C83F919F75FBE00163236 /* OrderNowViewController.swift in Sources */,
 				590C83F219F75DCA00163236 /* SettingsViewController.swift in Sources */,
+				238CAA271A0BE380001F2564 /* OrderModel.swift in Sources */,
 				4A81412D1A0AB6AE007E779C /* BeerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -36,17 +36,25 @@ class ConfirmationViewController: UIViewController, UIViewControllerTransitionin
     }
     
     override func viewDidAppear(animated: Bool) {
+        UIView.animateWithDuration(0.6, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 3, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+        self.etaView.frame.origin.y = 343
+        self.pizzaWedge.center.y = 175
+        self.orderButton.transform = CGAffineTransformScale(self.orderButton.transform, CGFloat(0.2), CGFloat(0.2))
+        self.orderButton.center.y = 275
+        }, completion: { (finished: Bool) -> Void in
         UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.Autoreverse | UIViewAnimationOptions.CurveEaseInOut | UIViewAnimationOptions.Repeat , animations: { () -> Void in
-            self.pizzaWedge.center.y = 190
-            }, completion: nil)
+        self.pizzaWedge.center.y = 190
+        }, completion: nil)
+        })
+        
         
         var timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
         
         delay(14, closure: { () -> () in
-            
-            self.performSegueWithIdentifier("orderReadySeg", sender: self)
+        
+        self.performSegueWithIdentifier("orderReadySeg", sender: self)
         })
-
+        
     }
     
     func update() {

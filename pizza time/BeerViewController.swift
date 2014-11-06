@@ -152,7 +152,6 @@ class BeerViewController: UIViewController {
     
     @IBAction func onAddButtonPressed(sender: AnyObject) {
         sixerActivityIndicator.startAnimating()
-        
         delay(2, closure: { () -> () in
             self.sixerActivityIndicator.stopAnimating()
         })
@@ -160,7 +159,6 @@ class BeerViewController: UIViewController {
     
     @IBAction func onNahButtonPressed(sender: AnyObject) {
         nahActivityIndicator.startAnimating()
-        
         delay(2, closure: { () -> () in
             self.nahActivityIndicator.stopAnimating()
         })

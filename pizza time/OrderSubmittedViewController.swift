@@ -50,6 +50,12 @@ class OrderSubmittedViewController: UIViewController {
             self.pizzaImageView.transform = CGAffineTransformConcat(scale, translate)
             }) { (finished: Bool) -> Void in
                 self.pizzaImageView.transform = CGAffineTransformMakeTranslation(-280, 0)
+                self.beverageLabel.alpha = 0
+                self.pizzaLabel.alpha = 0
+                self.orderButton.alpha = 0
+                self.letYouKnowLabel.alpha = 0
+                self.outForDeliveryLabel.alpha = 0
+                self.prepLabel.alpha = 0
         }
     }
     

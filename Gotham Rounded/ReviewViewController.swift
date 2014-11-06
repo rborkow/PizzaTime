@@ -102,6 +102,10 @@ class ReviewViewController: UIViewController, UIViewControllerTransitioningDeleg
         
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
 
     /*
     // MARK: - Navigation

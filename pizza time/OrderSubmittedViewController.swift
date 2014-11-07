@@ -30,7 +30,16 @@ class OrderSubmittedViewController: UIViewController {
         let translate = CGAffineTransformMakeTranslation(-280, 0)
         self.pizzaImageView.transform = CGAffineTransformConcat(scale, translate)
         
-        // Do any additional setup after loading the view.
+        if myOrder.pizzaOrderType == "Lucky" {
+           self.pizzaImageView.image = myOrder.luckyImage
+        } else if myOrder.pizzaOrderType == "Custom" {
+            let views = myOrder.customToppings as Array<UIImageView>
+            
+            for item in views {
+                self.pizzaImageView.addSubview(item)
+            }
+        }
+        
         launchNotification()
         println("Type:\(myOrder.pizzaOrderType), Beer?:\(myOrder.beerWasOrdered), Lucky Image?:\(myOrder.luckyImage), Toppings?:\(myOrder.customToppings)")
     }

@@ -18,6 +18,8 @@ class OrderSubmittedViewController: UIViewController {
     @IBOutlet weak var outForDeliveryLabel: UILabel!
     @IBOutlet weak var prepLabel: UILabel!
     
+    var myOrder = Order()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,6 +32,7 @@ class OrderSubmittedViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         launchNotification()
+        println("Type:\(myOrder.pizzaOrderType), Beer?:\(myOrder.beerWasOrdered), Lucky Image?:\(myOrder.luckyImage), Toppings?:\(myOrder.customToppings)")
     }
     
     override func viewDidAppear(animated: Bool) {

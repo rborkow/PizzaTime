@@ -1343,7 +1343,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="opl-RY-U6p" kind="modal" modalTransitionStyle="crossDissolve" id="72A-W8-Kjl"/>
+                                    <segue destination="opl-RY-U6p" kind="modal" identifier="orderToBeer" modalTransitionStyle="crossDissolve" id="72A-W8-Kjl"/>
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="5BO-mn-gLH">
@@ -1689,7 +1689,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="opl-RY-U6p" kind="modal" modalTransitionStyle="crossDissolve" id="196-2A-d20"/>
+                                    <segue destination="opl-RY-U6p" kind="modal" identifier="luckyToBeer" modalTransitionStyle="crossDissolve" id="196-2A-d20"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -2000,8 +2000,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="6Us-iZ-TxD"/>
+        <segue reference="q09-2K-SWS"/>
+        <segue reference="sIQ-MS-oRT"/>
         <segue reference="72A-W8-Kjl"/>
-        <segue reference="ccc-hi-vfH"/>
     </inferredMetricsTieBreakers>
 </document>

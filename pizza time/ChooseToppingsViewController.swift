@@ -48,6 +48,8 @@ class ChooseToppingsViewController: UIViewController, UIScrollViewDelegate {
     var imageCenter: CGPoint!
     var newImageView: UIImageView!
     
+    var myOrder = Order()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -484,6 +486,33 @@ class ChooseToppingsViewController: UIViewController, UIScrollViewDelegate {
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
+    }
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "orderToBeer" {
+            let viewController:BeerViewController = segue.destinationViewController as BeerViewController
+            
+            let toppingImageViews = [self.layerCrustImageView,
+                self.layerSauceImageView,
+                self.layerCheeseImageView,
+                self.layerPepperoniImageView,
+                self.layerPeppersImageView,
+                self.layerMushroomsImageView,
+                self.layerPineappleImageView,
+                self.layerOlivesImageView,
+                self.layerRedOnionImageView]
+            
+            self.myOrder.pizzaOrderType = "Custom"
+            self.myOrder.luckyImage = nil
+            self.myOrder.customToppings = toppingImageViews
+            
+            
+            viewController.myOrder = myOrder
+            
+        }
     }
         
 }

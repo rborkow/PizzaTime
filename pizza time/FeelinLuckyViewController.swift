@@ -17,6 +17,7 @@ class FeelinLuckyViewController: UIViewController {
     
     var pizzaOven = [String : UIImage]()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -114,14 +115,20 @@ class FeelinLuckyViewController: UIViewController {
     }
     
     
-    /*
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
+        if segue.identifier == "luckyToBeer" {
+            let viewController:BeerViewController = segue.destinationViewController as BeerViewController
+            
+            var myOrder = Order(pizzaOrderType: "Lucky", luckyImage: self.pizzaImageView.image, customToppings: nil)
+            
+            viewController.myOrder = myOrder
+            
+        }
     }
-    */
+    
     
 }

@@ -26,6 +26,8 @@ class BeerViewController: UIViewController {
     let motionQueue = NSOperationQueue()
     let motionManager = CMMotionManager()
     
+    var myOrder = Order()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -164,6 +166,7 @@ class BeerViewController: UIViewController {
     }
     
     @IBAction func onAddButtonPressed(sender: AnyObject) {
+        myOrder.beerWasOrdered = true
         sixerActivityIndicator.startAnimating()
         delay(2, closure: { () -> () in
             self.sixerActivityIndicator.stopAnimating()
@@ -200,14 +203,19 @@ class BeerViewController: UIViewController {
     }
     
     
-    /*
-    // MARK: - Navigation
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // MARK: - Navigation
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
+        let vc:OrderSubmittedViewController = segue.destinationViewController as OrderSubmittedViewController
+        if segue.identifier == "sixerToConfirmation" {
+            vc.myOrder = myOrder
+            
+        } else if segue.identifier == "nahToConfirmation" {
+            vc.myOrder = myOrder
+        }
+    
     }
-    */
+    
     
 }

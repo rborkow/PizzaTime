@@ -1875,7 +1875,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="67"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PEPPERONI &amp; BELL PEPPER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="V5Q-eh-DFl">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PIPING HOT PIZZA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="V5Q-eh-DFl">
                                 <rect key="frame" x="60" y="133" width="201" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="14"/>
@@ -1900,6 +1900,42 @@
                                 <rect key="frame" x="38" y="179" width="244" height="244"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="layerCrust" id="TAJ-3z-f6w">
+                                <rect key="frame" x="38" y="179" width="244" height="244"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="layerSauce" id="MFv-5d-7mV">
+                                <rect key="frame" x="65" y="198" width="190" height="190"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="layerCheese" id="Xeb-Hv-sGf">
+                                <rect key="frame" x="71" y="204" width="179" height="177"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="layerPepperoni" id="HEW-kq-o7s">
+                                <rect key="frame" x="75" y="217" width="174" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="layerPeppers" id="JkW-wE-QiM">
+                                <rect key="frame" x="82" y="211" width="142" height="170"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="layerMushrooms" id="tUk-O5-2dG">
+                                <rect key="frame" x="105" y="251" width="103" height="103"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="layerPineapple" id="8zd-OJ-BDi">
+                                <rect key="frame" x="93" y="209" width="128" height="151"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="layerRedonion" id="sCN-EI-zFS">
+                                <rect key="frame" x="124" y="211" width="111" height="130"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="layerOlives" id="5gi-kL-AcG">
+                                <rect key="frame" x="87" y="238" width="155" height="124"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FROSTY BEVERAGES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cvB-dJ-PfH">
                                 <rect key="frame" x="60" y="154" width="201" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1915,14 +1951,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="order goes out for delivery." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Fh-jg-6m7">
-                                <rect key="frame" x="60" y="465" width="201" height="21"/>
+                                <rect key="frame" x="60" y="458" width="201" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We'll let you know when this" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aXT-md-iQo">
-                                <rect key="frame" x="60" y="446" width="201" height="21"/>
+                                <rect key="frame" x="60" y="439" width="201" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="GothamRounded-Book" family="Gotham Rounded" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1933,6 +1969,15 @@
                     </view>
                     <connections>
                         <outlet property="beverageLabel" destination="cvB-dJ-PfH" id="Crf-9C-Wdr"/>
+                        <outlet property="layerCheeseImageView" destination="Xeb-Hv-sGf" id="7Bh-3V-gY6"/>
+                        <outlet property="layerCrustImageView" destination="TAJ-3z-f6w" id="QQz-cO-taE"/>
+                        <outlet property="layerMushroomsImageView" destination="tUk-O5-2dG" id="S90-Ku-UBD"/>
+                        <outlet property="layerOlivesImageView" destination="5gi-kL-AcG" id="dQ2-Lk-5hk"/>
+                        <outlet property="layerPepperoniImageView" destination="HEW-kq-o7s" id="nsp-5p-PbD"/>
+                        <outlet property="layerPeppersImageView" destination="JkW-wE-QiM" id="Uxm-SD-HpM"/>
+                        <outlet property="layerPineappleImageView" destination="8zd-OJ-BDi" id="6Ae-Sv-tmW"/>
+                        <outlet property="layerRedOnionImageView" destination="sCN-EI-zFS" id="bqW-Df-o0V"/>
+                        <outlet property="layerSauceImageView" destination="MFv-5d-7mV" id="RI3-C4-1rw"/>
                         <outlet property="letYouKnowLabel" destination="aXT-md-iQo" id="yIO-37-0QR"/>
                         <outlet property="orderButton" destination="0IN-W8-x5j" id="73A-vd-qHI"/>
                         <outlet property="outForDeliveryLabel" destination="6Fh-jg-6m7" id="NaO-7A-RVV"/>

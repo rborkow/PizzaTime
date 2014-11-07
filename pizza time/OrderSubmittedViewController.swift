@@ -17,7 +17,16 @@ class OrderSubmittedViewController: UIViewController {
     @IBOutlet weak var letYouKnowLabel: UILabel!
     @IBOutlet weak var outForDeliveryLabel: UILabel!
     @IBOutlet weak var prepLabel: UILabel!
-    
+    @IBOutlet weak var layerCrustImageView: UIImageView!
+    @IBOutlet weak var layerSauceImageView: UIImageView!
+    @IBOutlet weak var layerCheeseImageView: UIImageView!
+    @IBOutlet weak var layerPepperoniImageView: UIImageView!
+    @IBOutlet weak var layerPeppersImageView: UIImageView!
+    @IBOutlet weak var layerMushroomsImageView: UIImageView!
+    @IBOutlet weak var layerPineappleImageView: UIImageView!
+    @IBOutlet weak var layerRedOnionImageView: UIImageView!
+    @IBOutlet weak var layerOlivesImageView: UIImageView!
+
     var myOrder = Order()
     
     override func viewDidLoad() {
@@ -26,13 +35,46 @@ class OrderSubmittedViewController: UIViewController {
         letYouKnowLabel.alpha = 0
         outForDeliveryLabel.alpha = 0
         
+        self.layerCrustImageView.alpha = 0
+        self.layerSauceImageView.alpha = 0
+        self.layerCheeseImageView.alpha = 0
+        self.layerPepperoniImageView.alpha = 0
+        self.layerPeppersImageView.alpha = 0
+        self.layerMushroomsImageView.alpha = 0
+        self.layerPineappleImageView.alpha = 0
+        self.layerRedOnionImageView.alpha = 0
+        self.layerOlivesImageView.alpha = 0
+
+        
+        
         let scale = CGAffineTransformMakeScale(0.4, 0.4)
         let translate = CGAffineTransformMakeTranslation(-280, 0)
         self.pizzaImageView.transform = CGAffineTransformConcat(scale, translate)
         
-        // Do any additional setup after loading the view.
+        if myOrder.beerWasOrdered == false {
+            self.beverageLabel.alpha = 0.0
+        }
+        
+        if myOrder.pizzaOrderType == "Lucky" {
+           self.pizzaImageView.image = myOrder.luckyImage
+        } else if myOrder.pizzaOrderType == "Custom" {
+            let views = myOrder.customToppings as Array<UIImageView>
+            self.pizzaImageView.alpha = 0.0
+            
+            self.layerCrustImageView.alpha = views[0].alpha
+            self.layerSauceImageView.alpha = views[1].alpha
+            self.layerCheeseImageView.alpha = views[2].alpha
+            self.layerPepperoniImageView.alpha = views[3].alpha
+            self.layerPeppersImageView.alpha = views[4].alpha
+            self.layerMushroomsImageView.alpha = views[5].alpha
+            self.layerPineappleImageView.alpha = views[6].alpha
+            self.layerRedOnionImageView.alpha = views[8].alpha
+            self.layerOlivesImageView.alpha = views[7].alpha
+            
+        }
+        
         launchNotification()
-        println("Type:\(myOrder.pizzaOrderType), Beer?:\(myOrder.beerWasOrdered), Lucky Image?:\(myOrder.luckyImage), Toppings?:\(myOrder.customToppings)")
+
     }
     
     override func viewDidAppear(animated: Bool) {
